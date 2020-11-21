@@ -1,4 +1,5 @@
 # coding=utf-8
+import logging
 from typing import Optional
 from typing import Tuple
 from typing import Union
@@ -15,10 +16,16 @@ from .. import imputation_strategies
 from ..inference.independent import infer_missing
 from ..utils.base import impute_weighted_mean
 
+logger = logging.getLogger(__name__)
+
 
 class MultiImputer(TransformerMixin, BaseEstimator):
-    """ Does not impute values for categorical data as missingness is
-    one-hot-encoded later. """
+    """Apply a missing data imputation strategy column-by-column on a DataFrame.
+
+     Notes
+     -----
+     Does not impute values for categorical data as missingness can be taken
+     into account by one-hot-encoding later."""
 
     def __init__(
         self,
@@ -107,7 +114,7 @@ class MultiImputer(TransformerMixin, BaseEstimator):
         # Retrieve weights if passed in DataFrame and not
         if sample_weight is not None:
             if isinstance(sample_weight, str) and sample_weight in df.columns:
-                self.sample_weight = df.loc[:, weight_column]
+                self.sample_weight = df.loc[:, sample_weight]
             elif isinstance(sample_weight, (np.ndarray, pd.Series)):
                 self.sample_weight = sample_weight
             else:
