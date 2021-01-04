@@ -5,7 +5,7 @@ Credits
 Development Lead
 ----------------
 
-* Aris Tritas <a.tritas@gmail.com>
+* Aris Tritas <aris@tritas.com>
 
 Contributors
 ------------

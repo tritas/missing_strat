@@ -20,7 +20,23 @@ Python Missing Data Strategies
 
 
 
-Tools and strategies to handle missing data.
+Missing strat is a python library that pre-processes your dataset to fill missing data.
+
+The idea is to be able to easily state your assumption about the missingness mechanism,
+specify the outputs your expect (best-effort, force removal of missingness) and implement
+the inference process as fast and effiently as possible.
+
+Essentially an intelligent automl mechanism with user-provided specification of the
+underlying causal mechanism (if known) and budget in the form of time constraint. We do
+not want the pre-processing step to run for ages if it only brings incremental
+improvement to the downstream task.
+
+Easily plugging this transform in ML pipelines such as sklean or TFX is important (we do
+not address the could scenario ATM). The idea is to operate with a scikit-learn-like
+class interface, such that the code is widely portable in the pydata ecosystem.
+Recognizing that many new tools are part of the ML ecosystem, we provide a modular
+execution backend class that should allow running on: numpy, dask, spark udf, stan,
+tensorflow, pytorch. Contributions welcome!
 
 
 * Free software: BSD license
